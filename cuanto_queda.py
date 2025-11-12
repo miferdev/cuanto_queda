@@ -1,45 +1,41 @@
 from datetime import date, timedelta
 
-# festivos = {
-#     date(2025, 12, 8),  
-#     date(2025, 12, 22),  
-#     date(2025, 12, 23),  
-#     date(2025, 12, 24),  
-#     date(2025, 12, 25),  
-#     date(2025, 12, 26),  
-#     date(2025, 12, 27),  
-#     date(2025, 12, 28),  
-#     date(2025, 12, 29),  
-#     date(2025, 12, 30),  
-#     date(2025, 12, 31),  
-#     date(2026, 1, 1),
-#     date(2026, 1, 2),
-#     date(2026, 1, 3),
-#     date(2026, 1, 4),
-#     date(2026, 1, 5),
-#     date(2026, 1, 6),
-#     date(2026, 1, 7),
-# }
+fecha_inicio = date.today()
+fecha_fin = date(2026, 2, 13)
+festivos_unicos = {
+    date(2025, 12, 8),
+}
 
-fecha_final = date(2026, 2, 13)
+# Rango de festivos (ambos incluidos)
+rango_festivo_inicio = date(2025, 12, 22)
+rango_festivo_fin = date(2026, 1, 7)
 
-hoy = date.today()
+# --- FUNCIÓN PARA COMPROBAR SI ES DÍA LABORABLE ---
+def es_dia_laborable(d):
+    # Excluir fines de semana
+    if d.weekday() >= 5:  # 5 = sábado, 6 = domingo
+        return False
+    # Excluir festivos únicos
+    if d in festivos_unicos:
+        return False
+    # Excluir rango de festivos
+    if rango_festivo_inicio <= d <= rango_festivo_fin:
+        return False
+    return True
 
-dias_totales = fecha_final - hoy
+dia_actual = fecha_inicio
+dias_laborables = 0
+dias_totales = 0
 
-dias_de_clase = 0
+while dia_actual <= fecha_fin:
+    if es_dia_laborable(dia_actual):
+        dias_laborables += 1
+    dia_actual += timedelta(days=1)
 
-for i in range(dias_totales.days + 1):
-    dia = hoy + timedelta(days = i)
+while dia_actual <= fecha_fin:
+    dias_totales += 1
+    dia_actual += timedelta(days=1)
 
-    finde = dia.weekday() < 5
-    #festivo = dia in festivos
-    if not finde: #or not festivo:
-        dias_de_clase+=1
+print(f"Días laborables entre {fecha_inicio} y {fecha_fin}: {dias_laborables}")
+print(f"Días entre {fecha_inicio} y {fecha_fin}: {dias_totales}")
 
-
-
-
-print(f"{dias_totales.days} días naturales quedan para las prácticas\n")
-
-print(f"{dias_de_clase} días de clase quedan para las prácticas")
