@@ -1,7 +1,8 @@
+#!/usr/bin/python3
 from datetime import date, timedelta
 
 fecha_inicio = date.today()
-fecha_fin = date(2026, 2, 13)
+fecha_fin = date(2026, 2, 9)
 festivos_unicos = {
     date(2025, 12, 8),
 }
@@ -32,10 +33,8 @@ while dia_actual <= fecha_fin:
         dias_laborables += 1
     dia_actual += timedelta(days=1)
 
-while dia_actual <= fecha_fin:
-    dias_totales += 1
-    dia_actual += timedelta(days=1)
+
 
 print(f"Días laborables entre {fecha_inicio} y {fecha_fin}: {dias_laborables}")
-print(f"Días entre {fecha_inicio} y {fecha_fin}: {dias_totales}")
+#print(f"Días entre {fecha_inicio} y {fecha_fin}: {dias_totales}")
 
