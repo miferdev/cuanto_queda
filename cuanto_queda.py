@@ -26,7 +26,6 @@ def es_dia_laborable(d):
 
 dia_actual = fecha_inicio
 dias_laborables = 0
-dias_totales = 0
 
 while dia_actual <= fecha_fin:
     if es_dia_laborable(dia_actual):
@@ -34,7 +33,15 @@ while dia_actual <= fecha_fin:
     dia_actual += timedelta(days=1)
 
 
-
 print(f"Días laborables entre {fecha_inicio} y {fecha_fin}: {dias_laborables}")
-#print(f"Días entre {fecha_inicio} y {fecha_fin}: {dias_totales}")
+
+dia_actual = fecha_inicio
+dias_totales = 0
+
+while dia_actual <= fecha_fin:
+    dias_totales += 1
+    dia_actual += timedelta(days=1)
+
+
+print(f"Días entre {fecha_inicio} y {fecha_fin}: {dias_totales}")
 
